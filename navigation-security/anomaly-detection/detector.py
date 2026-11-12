@@ -38,7 +38,7 @@ class GNSSAnomalyDetector:
         max_feasible_accel: float = 5.0,  # m/s^2 for typical multirotor
         max_feasible_vel: float = 18.0,    # m/s
         chi2_threshold: float = 9.21,      # 99% confidence for 2 DOF
-        cusum_threshold: float = 15.0
+        cusum_threshold: float = 10.0
     ):
         self.dt = dt
         self.max_accel = max_feasible_accel
