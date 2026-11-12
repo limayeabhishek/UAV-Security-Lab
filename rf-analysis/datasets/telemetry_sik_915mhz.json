@@ -1,0 +1,13 @@
+{
+  "dataset_name": "telemetry_sik_915mhz",
+  "modulation": "2-GFSK",
+  "sample_rate_sps": 1000000,
+  "symbol_rate_baud": 50000,
+  "frequency_deviation_hz": 25000,
+  "sample_format": "complex64 (float32 I, float32 Q)",
+  "file_size_bytes": 74240,
+  "link_layer_protocol": "SiK / HopeRF Compatible",
+  "preamble_hex": "AAAAAAAA",
+  "sync_word_hex": "2DD4",
+  "crc_algorithm": "CRC-16-CCITT"
+}

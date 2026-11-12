@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     stdin_open: true
     tty: true
+    working_dir: /workspace/PX4-Autopilot
     environment:
       - HEADLESS=1
       - PX4_SIM_MODEL=gz_x500
@@ -14,17 +15,28 @@ services:
       - ./PX4-Autopilot:/workspace/PX4-Autopilot:rw
     ports:
       - "14540:14540/udp"
+      - "14550:14550/udp"
+      - "14580:14580/udp"
       - "18570:18570/udp"
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        git config --global --add safe.directory '*' 2>/dev/null || true
+        git checkout ROMFS/px4fmu_common/init.d-posix/px4-rc.mavlink 2>/dev/null || true
+        export HOME=/home/px4user
+        export HEADLESS=1
+        export PX4_SIM_MODEL=gz_x500
+        export PX4_GZ_WORLD=default
+        export PX4_GZ_MODELS=/workspace/PX4-Autopilot/Tools/simulation/gz/models
+        export PX4_GZ_WORLDS=/workspace/PX4-Autopilot/Tools/simulation/gz/worlds
+        export GZ_SIM_RESOURCE_PATH=/workspace/PX4-Autopilot/Tools/simulation/gz/models:/workspace/PX4-Autopilot/Tools/simulation/gz/worlds
+        export GZ_SIM_SERVER_CONFIG_PATH=/workspace/PX4-Autopilot/Tools/simulation/gz/server.config
+        export QT_X11_NO_MITSHM=1
+        cd /workspace/PX4-Autopilot
+        exec /workspace/PX4-Autopilot/build/px4_sitl_default/bin/px4 -d /workspace/PX4-Autopilot/build/px4_sitl_default/etc
     networks:
-      uav_security_net:
-        ipv4_address: 172.28.0.10
+      - uav_security_net
 
 networks:
   uav_security_net:
-    name: uav_security_net
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.28.0.0/24
-          gateway: 172.28.0.1
+    external: true

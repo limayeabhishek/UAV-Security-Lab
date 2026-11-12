@@ -1,0 +1,257 @@
+{
+  "assessment_id": "SECUREDRONE-MAV-1794472179",
+  "timestamp_utc": "2026-11-12T08:29:39.558844+00:00",
+  "target_endpoints": {
+    "listen": "udpin:0.0.0.0:14550",
+    "send": "udpout:127.0.0.1:14540"
+  },
+  "modules_evaluated": [
+    {
+      "module": "protocol_analyzer",
+      "result": {
+        "total_frames_parsed": 3748,
+        "protocol_version_distribution": {
+          "mavlink_v1": 0,
+          "mavlink_v2": 3748,
+          "v2_percentage": 100.0
+        },
+        "cryptographic_signing": {
+          "signed_frames": 0,
+          "unsigned_frames": 3748,
+          "signing_rate_percent": 0.0,
+          "vulnerability_flag": true,
+          "risk_summary": "Unauthenticated cleartext telemetry: susceptible to injection and spoofing"
+        },
+        "active_endpoints": {
+          "1.1": 3748
+        },
+        "sequence_integrity": {
+          "total_anomalies_detected": 0,
+          "sample_anomalies": []
+        },
+        "message_frequency": [
+          [
+            "ATTITUDE",
+            499
+          ],
+          [
+            "ATTITUDE_QUATERNION",
+            499
+          ],
+          [
+            "ATTITUDE_TARGET",
+            499
+          ],
+          [
+            "GLOBAL_POSITION_INT",
+            499
+          ],
+          [
+            "LOCAL_POSITION_NED",
+            499
+          ],
+          [
+            "UNKNOWN_85",
+            499
+          ],
+          [
+            "UNKNOWN_36",
+            499
+          ],
+          [
+            "GPS_RAW_INT",
+            50
+          ],
+          [
+            "UNKNOWN_74",
+            40
+          ],
+          [
+            "MISSION_CURRENT",
+            10
+          ],
+          [
+            "HEARTBEAT",
+            10
+          ],
+          [
+            "UNKNOWN_141",
+            10
+          ],
+          [
+            "UNKNOWN_290",
+            10
+          ],
+          [
+            "UNKNOWN_291",
+            10
+          ],
+          [
+            "EXTENDED_SYS_STATE",
+            10
+          ],
+          [
+            "UNKNOWN_441",
+            10
+          ],
+          [
+            "UNKNOWN_515",
+            10
+          ],
+          [
+            "UNKNOWN_12901",
+            10
+          ],
+          [
+            "UNKNOWN_12904",
+            10
+          ],
+          [
+            "UNKNOWN_29",
+            10
+          ],
+          [
+            "SYS_STATUS",
+            10
+          ],
+          [
+            "UNKNOWN_8",
+            10
+          ],
+          [
+            "UNKNOWN_380",
+            5
+          ],
+          [
+            "BATTERY_STATUS",
+            5
+          ],
+          [
+            "UNKNOWN_436",
+            5
+          ],
+          [
+            "UNKNOWN_230",
+            5
+          ],
+          [
+            "UNKNOWN_514",
+            5
+          ],
+          [
+            "UNKNOWN_242",
+            5
+          ],
+          [
+            "UNKNOWN_411",
+            3
+          ],
+          [
+            "PING",
+            1
+          ],
+          [
+            "UNKNOWN_241",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "module": "signing_auditor",
+      "result": {
+        "target": "udpout:127.0.0.1:14540",
+        "timestamp": 1794472182.587921,
+        "signing_enforced": true,
+        "unsigned_commands_accepted": false,
+        "classification": "PASS",
+        "findings": []
+      }
+    },
+    {
+      "module": "replay_assessor",
+      "result": {
+        "test": "replay_attack_assessment",
+        "target": "127.0.0.1:14540",
+        "packet_length": 41,
+        "replays_attempted": 3,
+        "replays_accepted": 0,
+        "classification": "PASS",
+        "vulnerability_flag": false,
+        "responses": [
+          {
+            "replay_index": 1,
+            "timestamp_sent": 1794472183.5960152,
+            "response_received": false,
+            "response_type": null
+          },
+          {
+            "replay_index": 2,
+            "timestamp_sent": 1794472185.1122959,
+            "response_received": false,
+            "response_type": null
+          },
+          {
+            "replay_index": 3,
+            "timestamp_sent": 1794472186.6270778,
+            "response_received": false,
+            "response_type": null
+          }
+        ],
+        "finding": null
+      }
+    },
+    {
+      "module": "parameter_auditor",
+      "inventory": {},
+      "write_audit": {
+        "test": "parameter_write_authorization",
+        "param_tested": "GF_ACTION",
+        "classification": "INCONCLUSIVE",
+        "reason": "Target parameter 'GF_ACTION' not returned by autopilot"
+      }
+    },
+    {
+      "module": "trust_boundary",
+      "spoofing": {
+        "test": "endpoint_identity_spoofing",
+        "spoofed_sysid": 255,
+        "spoofed_compid": 190,
+        "response_received": false,
+        "classification": "PASS",
+        "architectural_observation": "Autopilot enforced identity verification."
+      },
+      "shared_key_analysis": {
+        "model": "symmetric_shared_key_trust_boundary",
+        "shared_key_length_bits": 256,
+        "companion_signature_hex": "a359bd4fb371",
+        "forged_gcs_signature_hex": "38d80a23242c",
+        "cryptographic_finding": {
+          "id": "ARCH-MAV-001",
+          "title": "Absence of Non-Repudiation and Role Separation in Symmetric MAVLink 2 Signing",
+          "severity": "MEDIUM (Architectural)",
+          "explanation": "MAVLink 2 signing relies on symmetric HMAC-SHA256. Because all authorized nodes (GCS, Telemetry Transceiver, and Companion Computer) possess the identical secret key, a compromise of any single peripheral node (such as an internet-facing companion computer) grants cryptographic ability to sign and execute high-privilege commands as the GCS. Symmetric signatures authenticate channel possession, not granular authorization.",
+          "defense_in_depth_remediation": "Implement a companion computer MAVLink firewall / router that operates on an isolated serial channel with a command whitelist, preventing the companion computer from forwarding flight-critical disarm or termination commands regardless of key possession."
+        }
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "SEC-MAV-001",
+      "title": "Cleartext and Unsigned MAVLink 2 Telemetry",
+      "severity": "HIGH",
+      "cvss_v31": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H (8.8)",
+      "impact": "Passive adversaries can intercept telemetry and inject arbitrary commands.",
+      "remediation": "Enable MAVLink 2 signing with a 256-bit secret key across all data links."
+    },
+    {
+      "id": "ARCH-MAV-001",
+      "title": "Absence of Non-Repudiation and Role Separation in Symmetric MAVLink 2 Signing",
+      "severity": "MEDIUM (Architectural)",
+      "explanation": "MAVLink 2 signing relies on symmetric HMAC-SHA256. Because all authorized nodes (GCS, Telemetry Transceiver, and Companion Computer) possess the identical secret key, a compromise of any single peripheral node (such as an internet-facing companion computer) grants cryptographic ability to sign and execute high-privilege commands as the GCS. Symmetric signatures authenticate channel possession, not granular authorization.",
+      "defense_in_depth_remediation": "Implement a companion computer MAVLink firewall / router that operates on an isolated serial channel with a command whitelist, preventing the companion computer from forwarding flight-critical disarm or termination commands regardless of key possession."
+    }
+  ],
+  "overall_status": "COMPLETED"
+}
