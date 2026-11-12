@@ -1,0 +1,89 @@
+{
+  "benchmark": "SECUREDRONE GNSS Integrity & Spoofing Evaluation",
+  "detection_metrics": {
+    "total_epochs": 1000,
+    "step_attack_epochs": "300 - 450 (t=30.0s - 45.0s)",
+    "step_spoofing_detected": true,
+    "step_attack_time_to_detect_ms": 0,
+    "step_mitigation_action": "ALT_HOLD (Inertial Dead-Reckoning)",
+    "drift_attack_epochs": "600 - 850 (t=60.0s - 85.0s)",
+    "drift_spoofing_detected": true,
+    "drift_attack_time_to_detect_sec": 21.7,
+    "drift_mitigation_action": "AUTO_LAND (Controlled Termination)",
+    "baseline_false_alarm_rate_pct": 1.03
+  },
+  "sample_events": [
+    {
+      "epoch": 193,
+      "timestamp_sec": 19.3,
+      "detector": "EKF Chi-Square Innovation",
+      "anomaly_score": 18.104494483899384,
+      "threshold": 9.21,
+      "severity": "CRITICAL",
+      "failsafe_action": "Reject GNSS -> Switch to Inertial/Altitude Hold"
+    },
+    {
+      "epoch": 282,
+      "timestamp_sec": 28.200000000000003,
+      "detector": "EKF Chi-Square Innovation",
+      "anomaly_score": 12.813924917350057,
+      "threshold": 9.21,
+      "severity": "CRITICAL",
+      "failsafe_action": "Reject GNSS -> Switch to Inertial/Altitude Hold"
+    },
+    {
+      "epoch": 283,
+      "timestamp_sec": 28.3,
+      "detector": "EKF Chi-Square Innovation",
+      "anomaly_score": 9.328439936396354,
+      "threshold": 9.21,
+      "severity": "CRITICAL",
+      "failsafe_action": "Reject GNSS -> Switch to Inertial/Altitude Hold"
+    },
+    {
+      "epoch": 300,
+      "timestamp_sec": 30.0,
+      "detector": "EKF Chi-Square Innovation",
+      "anomaly_score": 6145.277924710931,
+      "threshold": 9.21,
+      "severity": "CRITICAL",
+      "failsafe_action": "Reject GNSS -> Switch to Inertial/Altitude Hold"
+    },
+    {
+      "epoch": 301,
+      "timestamp_sec": 30.1,
+      "detector": "EKF Chi-Square Innovation",
+      "anomaly_score": 6132.734662024877,
+      "threshold": 9.21,
+      "severity": "CRITICAL",
+      "failsafe_action": "Reject GNSS -> Switch to Inertial/Altitude Hold"
+    },
+    {
+      "epoch": 302,
+      "timestamp_sec": 30.200000000000003,
+      "detector": "CUSUM Drift",
+      "anomaly_score": 74.93440848995061,
+      "threshold": 15.0,
+      "severity": "HIGH",
+      "failsafe_action": "Detected Coordinated Drift -> Trigger Controlled Land"
+    },
+    {
+      "epoch": 303,
+      "timestamp_sec": 30.3,
+      "detector": "CUSUM Drift",
+      "anomaly_score": 71.12660171215164,
+      "threshold": 15.0,
+      "severity": "HIGH",
+      "failsafe_action": "Detected Coordinated Drift -> Trigger Controlled Land"
+    },
+    {
+      "epoch": 304,
+      "timestamp_sec": 30.400000000000002,
+      "detector": "CUSUM Drift",
+      "anomaly_score": 68.16998476121638,
+      "threshold": 15.0,
+      "severity": "HIGH",
+      "failsafe_action": "Detected Coordinated Drift -> Trigger Controlled Land"
+    }
+  ]
+}

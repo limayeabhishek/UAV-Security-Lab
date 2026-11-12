@@ -1,0 +1,85 @@
+{
+  "artifact_info": {
+    "source_file": "firmware-analysis/manifests/arducopter_pixhawk4.apj",
+    "container_format": "APJFWv1",
+    "container_sha256": "5e2a0ef273e26e2c30f76e94781a695ee00285e653aa84122bea36903a886c63",
+    "board_id": 50,
+    "board_summary": "Pixhawk4",
+    "target_mcu": "Firmware for a STM32F767xx board",
+    "git_commit": "fb773567",
+    "flash_capacity_bytes": 2064384
+  },
+  "binary_extraction": {
+    "extracted_path": "firmware-analysis/manifests/arducopter_pixhawk4.bin",
+    "binary_size_bytes": 1564244,
+    "binary_sha256": "1fc8a51b93a7d0e67e25823b4fffbcea80b6515cb388dd948bf949f2c98d6afd"
+  },
+  "architecture_identification": {
+    "cpu_family": "ARM Cortex-M7 (STM32F767)",
+    "instruction_set": "Thumb-2 (16/32-bit)",
+    "endianness": "Little-Endian",
+    "fpu": "FPv5-D16 (Hardware Floating Point)"
+  },
+  "memory_layout": {
+    "inferred_flash_base": "0x8008000",
+    "initial_stack_pointer": "0x20020600",
+    "sram_region": "SRAM1/SRAM2 / DTCM",
+    "reset_handler_raw": "0x8008ced",
+    "entrypoint_address": "0x8008cec",
+    "thumb_bit_set": true
+  },
+  "interrupt_vector_table_preview": [
+    {
+      "vector": 0,
+      "name": "Initial_SP",
+      "address": "0x20020600"
+    },
+    {
+      "vector": 1,
+      "name": "Reset_Handler",
+      "address": "0x8008ced"
+    },
+    {
+      "vector": 2,
+      "name": "NMI_Handler",
+      "address": "0x80dab01"
+    },
+    {
+      "vector": 3,
+      "name": "HardFault_Handler",
+      "address": "0x80082a1"
+    },
+    {
+      "vector": 4,
+      "name": "MemManage_Handler",
+      "address": "0x80daa89"
+    },
+    {
+      "vector": 5,
+      "name": "BusFault_Handler",
+      "address": "0x80daa81"
+    },
+    {
+      "vector": 6,
+      "name": "UsageFault_Handler",
+      "address": "0x80daa85"
+    }
+  ],
+  "security_symbol_reconnaissance": {
+    "total_security_strings_found": 122,
+    "sample_symbols": [
+      "%s below failsafe",
+      "Bad parameter: %s",
+      "GCS failsafe on",
+      "Battery failsafe",
+      "%s mode not armable",
+      "AP_Param must be singleton",
+      "Copter::auto_disarm_check",
+      "TimeUS,ArmState,ArmChecks,Forced,Method",
+      "TimeUS,Param,TunVal,TunMin,TunMax,NIn",
+      "ARMING_",
+      "DISARM_DELAY",
+      "Crash: Disarming: AngErr=%.0f>%.0f, Accel=%.1f<%.1f"
+    ]
+  }
+}
