@@ -1,0 +1,57 @@
+{
+  "timestamp_utc": "2026-11-12T08:12:54.151095+00:00",
+  "endpoint": "udpin:0.0.0.0:14550",
+  "duration_seconds": 10,
+  "total_packets": 3748,
+  "protocol_breakdown": {
+    "mavlink_v1": 0,
+    "mavlink_v2": 3748,
+    "mavlink_v2_signed": 0,
+    "signing_enforced": false
+  },
+  "endpoints_discovered": [
+    {
+      "system_id": 0,
+      "component_id": 0,
+      "role": "Subsystem"
+    },
+    {
+      "system_id": 1,
+      "component_id": 1,
+      "role": "Autopilot FMU"
+    }
+  ],
+  "message_frequency": {
+    "ATTITUDE": 499,
+    "ATTITUDE_QUATERNION": 499,
+    "ATTITUDE_TARGET": 499,
+    "GLOBAL_POSITION_INT": 499,
+    "LOCAL_POSITION_NED": 499,
+    "POSITION_TARGET_LOCAL_NED": 499,
+    "SERVO_OUTPUT_RAW": 499,
+    "GPS_RAW_INT": 50,
+    "VFR_HUD": 40,
+    "MISSION_CURRENT": 10,
+    "UNKNOWN_380": 5,
+    "HEARTBEAT": 10,
+    "ALTITUDE": 10,
+    "UNKNOWN_290": 10,
+    "UNKNOWN_291": 10,
+    "EXTENDED_SYS_STATE": 10,
+    "GNSS_INTEGRITY": 10,
+    "UNKNOWN_515": 10,
+    "OPEN_DRONE_ID_LOCATION": 10,
+    "OPEN_DRONE_ID_SYSTEM": 10,
+    "SCALED_PRESSURE": 10,
+    "SYS_STATUS": 10,
+    "UNKNOWN_8": 10,
+    "BATTERY_STATUS": 5,
+    "CURRENT_MODE": 5,
+    "ESTIMATOR_STATUS": 5,
+    "UNKNOWN_514": 5,
+    "HOME_POSITION": 5,
+    "UNKNOWN_411": 3,
+    "PING": 1,
+    "VIBRATION": 1
+  }
+}

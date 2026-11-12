@@ -1,0 +1,30 @@
+services:
+  px4-target:
+    image: docker-px4-sitl:latest
+    container_name: uav-target-drone
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    environment:
+      - HEADLESS=1
+      - PX4_SIM_MODEL=gz_x500
+      - PX4_GZ_WORLD=default
+      - PX4_NET_INTERFACE=eth0
+    volumes:
+      - ../../PX4-Autopilot:/workspace/PX4-Autopilot:rw
+    ports:
+      - "14540:14540/udp"
+      - "18570:18570/udp"
+    networks:
+      uav_security_net:
+        ipv4_address: 172.28.0.10
+
+networks:
+  uav_security_net:
+    name: uav_security_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/24
+          gateway: 172.28.0.1
