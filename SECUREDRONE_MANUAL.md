@@ -156,7 +156,7 @@ To configure the isolated Python environment:
 
 ```bash
 # Clone the repository
-git clone https://github.com/AbhishekLimaye/UAV-Security-Lab.git
+git clone https://github.com/limayeabhishek/UAV-Security-Lab.git
 cd UAV-Security-Lab
 
 # Create and activate virtual environment

@@ -136,7 +136,7 @@ If you reference this platform, methodology, or datasets in your research:
   title = {{SECUREDRONE: Open UAV Security Research & Assessment Platform}},
   year = {2026},
   publisher = {GitHub},
-  howpublished = {\url{https://github.com/AbhishekLimaye/UAV-Security-Lab}}
+  howpublished = {\url{https://github.com/limayeabhishek/UAV-Security-Lab}}
 }
 ```
 
