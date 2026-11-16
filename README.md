@@ -3,6 +3,7 @@
 ![Release](https://img.shields.io/badge/Release-0.1.0-blue)
 ![Platform](https://img.shields.io/badge/Platform-macOS%20ARM64%20%7C%20Linux-green)
 ![Python](https://img.shields.io/badge/Python-3.13.9-brightgreen)
+[![SECUREDRONE CI](https://github.com/limayeabhishek/UAV-Security-Lab/actions/workflows/ci.yml/badge.svg)](https://github.com/limayeabhishek/UAV-Security-Lab/actions/workflows/ci.yml)
 ![Tests](https://img.shields.io/badge/Tests-13%2F13%20Passing-brightgreen)
 ![License](https://img.shields.io/badge/License-Apache--2.0-yellow)
 
