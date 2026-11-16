@@ -49,6 +49,7 @@
 }
 
 % --- Header and Footer ---
+\setlength{\headheight}{14pt}
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\textcolor{gray}{\footnotesize SECUREDRONE: Empirical UAV Security Assessment}}
@@ -244,7 +245,7 @@ The least significant bit ($b_0 = 1$) verifies that the CPU boots into Thumb exe
 % -----------------------------------------------------------------------------
 
 \subsection{Offline 2-GFSK IQ Demodulation Pipeline}
-Drone telemetry links commonly operate on 915 MHz / 433 MHz ISM bands utilizing 2-GFSK modulation (Gaussian Frequency Shift Keying). I created an offline signal processing and demodulation engine in \texttt{rf-analysis/signal-processing/iq_demodulator.py}.
+Drone telemetry links commonly operate on 915 MHz / 433 MHz ISM bands utilizing 2-GFSK modulation (Gaussian Frequency Shift Keying). I created an offline signal processing and demodulation engine in \texttt{rf-analysis/signal-processing/iq\_demodulator.py}.
 
 The demodulator implements quadrature phase discrimination:
 \begin{equation}

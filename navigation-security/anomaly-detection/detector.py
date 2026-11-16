@@ -46,7 +46,7 @@ class GNSSAnomalyDetector:
         self.chi2_thresh = chi2_threshold
         self.cusum_thresh = cusum_threshold
 
-    def generate_synthetic_flight_dataset(self, num_points: int = 1000) -> Dict[str, np.ndarray]:
+    def generate_synthetic_flight_dataset(self, num_points: int = 1000, seed: int = 42) -> Dict[str, np.ndarray]:
         """
         Synthesizes 100s flight (10 Hz = 1000 points):
         - t = 0..30s: Normal flight (hover/waypoint at 5 m/s) with Gaussian noise (sigma=0.5m).
@@ -55,6 +55,7 @@ class GNSSAnomalyDetector:
         - t = 60..85s: Subtle Coordinated Drift Spoofing (ramping at 0.3 m/s^2).
         - t = 85..100s: Stable flight.
         """
+        rng = np.random.RandomState(seed)
         t = np.linspace(0, (num_points - 1) * self.dt, num_points)
         
         # Ground Truth Trajectory (Smooth flight along X-axis at 2 m/s)
@@ -64,8 +65,8 @@ class GNSSAnomalyDetector:
         vy_true = np.gradient(y_true, self.dt)
 
         # Baseline GNSS measurement with Gaussian receiver noise
-        noise_x = np.random.normal(0, 0.4, num_points)
-        noise_y = np.random.normal(0, 0.4, num_points)
+        noise_x = rng.normal(0, 0.4, num_points)
+        noise_y = rng.normal(0, 0.4, num_points)
         x_meas = x_true + noise_x
         y_meas = y_true + noise_y
 

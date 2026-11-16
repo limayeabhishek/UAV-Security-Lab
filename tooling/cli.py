@@ -12,6 +12,9 @@ import sys
 import time
 from datetime import datetime, timezone
 
+# Ensure project root is in sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from mavlink_security.analyzer.parser import MAVLinkParser, analyze_capture
 from mavlink_security.analyzer.recon import run_reconnaissance
 from mavlink_security.signing.auditor import MAVLinkSigningAuditor

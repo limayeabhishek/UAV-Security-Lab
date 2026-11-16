@@ -74,7 +74,7 @@ This report presents an empirical, reproducible cybersecurity assessment of unma
   ```bash
   python tooling/cli.py analyze evidence/telemetry_recon_baseline.pcap
   ```
-- **Evidence**: [`evidence/telemetry_recon_summary.json`](file:///Users/abhisheklimaye/UAV-Security-Lab/evidence/telemetry_recon_summary.json) demonstrates that 100% of 3,748 captured packets have `incompat_flags & 0x01 == 0` (zero signed frames).
+- **Evidence**: [`evidence/telemetry_recon_summary.json`](evidence/telemetry_recon_summary.json) demonstrates that 100% of 3,748 captured packets have `incompat_flags & 0x01 == 0` (zero signed frames).
 - **Impact vs. Flight Safety**: Allows eavesdropping on mission plans and injection of unauthorized waypoint updates.
 - **Remediation**: Deploy MAVLink 2 cryptographic signing using `SETUP_SIGNING` and configure parameter `MAV_0_AUTH = 1`.
 
@@ -147,12 +147,12 @@ This report presents an empirical, reproducible cybersecurity assessment of unma
 
 | Domain | Competency Claimed | Verified Repository Artifact | Empirical Verification Evidence |
 | :--- | :--- | :--- | :--- |
-| **Protocol Analysis** | Binary MAVLink v1/v2 parsing | [`mavlink-security/analyzer/parser.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/mavlink-security/analyzer/parser.py) | 3,748 frames parsed in [`evidence/telemetry_recon_baseline.pcap`](file:///Users/abhisheklimaye/UAV-Security-Lab/evidence/telemetry_recon_baseline.pcap) |
-| **Applied Cryptography** | MAVLink 2 SHA-256 HMAC & Replay | [`mavlink-security/signing/auditor.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/mavlink-security/signing/auditor.py) | Unit tests in [`mavlink-security/tests/test_parser.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/mavlink-security/tests/test_parser.py) |
-| **Companion Security** | API Audit, Hardening & MAVLink Firewall | [`companion-security/hardened-api/firewall.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/companion-security/hardened-api/firewall.py) | Passing tests in [`companion-security/tests/test_companion_security.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/companion-security/tests/test_companion_security.py) |
-| **Firmware Reverse Eng.** | Container unpacker, Vector Table & Ghidra | [`firmware-analysis/unpackers/apj_unpacker.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/firmware-analysis/unpackers/apj_unpacker.py) | Pixhawk 4 manifest at [`firmware-analysis/manifests/firmware_manifest.json`](file:///Users/abhisheklimaye/UAV-Security-Lab/firmware-analysis/manifests/firmware_manifest.json) |
-| **RF Signal Processing** | 2-GFSK IQ Demodulation & CRC-16 | [`rf-analysis/signal-processing/iq_demodulator.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/rf-analysis/signal-processing/iq_demodulator.py) | IQ dataset at [`rf-analysis/datasets/telemetry_sik_915mhz.iq`](file:///Users/abhisheklimaye/UAV-Security-Lab/rf-analysis/datasets/telemetry_sik_915mhz.iq) & plot |
-| **Cyber-Physical Safety** | GNSS Spoofing Detection & Failsafes | [`navigation-security/anomaly-detection/detector.py`](file:///Users/abhisheklimaye/UAV-Security-Lab/navigation-security/anomaly-detection/detector.py) | Benchmark report at [`reports/navigation_integrity_report.json`](file:///Users/abhisheklimaye/UAV-Security-Lab/reports/navigation_integrity_report.json) & plot |
+| **Protocol Analysis** | Binary MAVLink v1/v2 parsing | [`mavlink-security/analyzer/parser.py`](mavlink-security/analyzer/parser.py) | 3,748 frames parsed in [`evidence/telemetry_recon_baseline.pcap`](evidence/telemetry_recon_baseline.pcap) |
+| **Applied Cryptography** | MAVLink 2 SHA-256 HMAC & Replay | [`mavlink-security/signing/auditor.py`](mavlink-security/signing/auditor.py) | Unit tests in [`mavlink-security/tests/test_parser.py`](mavlink-security/tests/test_parser.py) |
+| **Companion Security** | API Audit, Hardening & MAVLink Firewall | [`companion-security/hardened-api/firewall.py`](companion-security/hardened-api/firewall.py) | Passing tests in [`companion-security/tests/test_companion_security.py`](companion-security/tests/test_companion_security.py) |
+| **Firmware Reverse Eng.** | Container unpacker, Vector Table & Ghidra | [`firmware-analysis/unpackers/apj_unpacker.py`](firmware-analysis/unpackers/apj_unpacker.py) | Pixhawk 4 manifest at [`firmware-analysis/manifests/firmware_manifest.json`](firmware-analysis/manifests/firmware_manifest.json) |
+| **RF Signal Processing** | 2-GFSK IQ Demodulation & CRC-16 | [`rf-analysis/signal-processing/iq_demodulator.py`](rf-analysis/signal-processing/iq_demodulator.py) | IQ dataset at [`rf-analysis/datasets/telemetry_sik_915mhz.iq`](rf-analysis/datasets/telemetry_sik_915mhz.iq) & plot |
+| **Cyber-Physical Safety** | GNSS Spoofing Detection & Failsafes | [`navigation-security/anomaly-detection/detector.py`](navigation-security/anomaly-detection/detector.py) | Benchmark report at [`reports/navigation_integrity_report.json`](reports/navigation_integrity_report.json) & plot |
 | **Automated Verification** | CI/CD Regression Test Suite | Full pytest test suite | **13 passed in 1.65 seconds** |
 
 ---

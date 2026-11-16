@@ -35,6 +35,7 @@ PX4-Autopilot/
 *.ulg
 *.tar.gz
 *.iso
+*.zip
 
 # IDE
 .vscode/
